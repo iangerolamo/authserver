@@ -4,8 +4,12 @@ import com.gerolamo.authservice.dto.AuthRequestDTO;
 import com.gerolamo.authservice.dto.AuthResponseDTO;
 import com.gerolamo.authservice.service.AuthService;
 import com.gerolamo.authservice.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,10 +26,15 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody AuthRequestDTO authRequestDTO) {
-        String token = authService.authenticate(authRequestDTO);
-
-        return ResponseEntity.ok(new AuthResponseDTO(token));
+    public ResponseEntity<?> login(@RequestBody AuthRequestDTO authRequestDTO) {
+        try {
+            String token = authService.authenticate(authRequestDTO);
+            return ResponseEntity.ok(new AuthResponseDTO(token));
+        } catch (IllegalArgumentException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+        }
     }
 
 }
