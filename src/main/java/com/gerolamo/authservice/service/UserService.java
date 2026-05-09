@@ -7,51 +7,53 @@ import com.gerolamo.authservice.model.User;
 import com.gerolamo.authservice.repository.RoleRepository;
 import com.gerolamo.authservice.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
+    private static final String DEFAULT_ROLE = "ROLE_USER";
+
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
-
+    private final PasswordEncoder passwordEncoder;
 
     public UserService(RoleRepository roleRepository,
-                       UserRepository userRepository) {
+                       UserRepository userRepository,
+                       PasswordEncoder passwordEncoder) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
     public RegisterResponseDTO register(RegisterRequestDTO request) {
-
         String email = request.getEmail().toLowerCase().trim();
 
         if (userRepository.existsByEmail(email)) {
-            throw new IllegalArgumentException("Email already exists");
+            throw new IllegalArgumentException("Email ja cadastrado");
         }
 
-        Role defaultRole = roleRepository.findByName("ROLE_USER").get();
+        Role defaultRole = roleRepository.findByName(DEFAULT_ROLE)
+                .orElseThrow(() -> new IllegalStateException("Role padrao nao encontrada: " + DEFAULT_ROLE));
 
         User user = new User();
         user.setName(request.getName());
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setEmail(email);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEnabled(true);
         user.addRole(defaultRole);
 
         User savedUser = userRepository.save(user);
 
-        List<String> roles = savedUser.getRoles().stream().map(Role::getName).collect(Collectors.toList());
+        return mapToResponse(savedUser);
+    }
 
-        RegisterResponseDTO registerResponseDTO = new RegisterResponseDTO();
-
-        registerResponseDTO.setName(savedUser.getName());
-        registerResponseDTO.setEmail(savedUser.getEmail());
-
-        return registerResponseDTO;
-  }
+    private RegisterResponseDTO mapToResponse(User user) {
+        RegisterResponseDTO response = new RegisterResponseDTO();
+        response.setName(user.getName());
+        response.setEmail(user.getEmail());
+        return response;
+    }
 }

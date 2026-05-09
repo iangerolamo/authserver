@@ -19,5 +19,7 @@ spring:
 
 jwt:
   secret: "CC/B5fDT25kaa3UJKZA2VoAHB5BVcVVpMchd02nacyew8/Em2ezo5NSkK20iaymWXa8vdBVmvrFRI51cIwKnaw=="
-  expiration: 360000
+  expiration: 3600000
 
+cors:
+  allowed-origins: "http://localhost:4200,http://localhost:3000,http://localhost:8080"

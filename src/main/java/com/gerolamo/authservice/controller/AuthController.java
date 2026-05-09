@@ -4,6 +4,7 @@ import com.gerolamo.authservice.dto.AuthRequestDTO;
 import com.gerolamo.authservice.dto.AuthResponseDTO;
 import com.gerolamo.authservice.service.AuthService;
 import com.gerolamo.authservice.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
 public class AuthController {
     private final AuthService authService;
 
@@ -26,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequestDTO authRequestDTO) {
+    public ResponseEntity<?> login(@Valid @RequestBody AuthRequestDTO authRequestDTO) {
         try {
             String token = authService.authenticate(authRequestDTO);
             return ResponseEntity.ok(new AuthResponseDTO(token));

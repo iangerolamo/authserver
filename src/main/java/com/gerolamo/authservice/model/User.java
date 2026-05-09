@@ -18,42 +18,55 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  private String email;
+    @Column(nullable = false, unique = true)
+    private String email;
 
-  private String password;
+    @Column(nullable = false)
+    private String password;
 
-  private String name;
+    @Column(nullable = false)
+    private String name;
 
-  @Enumerated(EnumType.STRING)
-  private AuthProvider provider;
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
 
-  private String googleId;
+    private String googleId;
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(
-      name = "user_roles",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "role_id"))
-  private List<Role> roles = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles = new ArrayList<>();
 
-  private boolean enabled;
+    @Column(nullable = false)
+    private boolean enabled = true;
 
-  private LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
-  private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
-  private LocalDateTime deletedAt;
+    private LocalDateTime deletedAt;
 
-  public void addRole(Role role) {
-
-    boolean alreadyHas = roles.stream().anyMatch(r -> r.getName().equals(role.getName()));
-    if (!alreadyHas) {
-      this.roles.add(role);
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
-  }
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
+    public void addRole(Role role) {
+        boolean alreadyHas = roles.stream().anyMatch(r -> r.getName().equals(role.getName()));
+        if (!alreadyHas) {
+            this.roles.add(role);
+        }
+    }
 }

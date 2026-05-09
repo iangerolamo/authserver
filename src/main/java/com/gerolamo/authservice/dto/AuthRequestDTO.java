@@ -1,5 +1,7 @@
 package com.gerolamo.authservice.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AuthRequestDTO {
 
-  private String username;
-  private String password;
+    @NotBlank(message = "Email é obrigatório")
+    @Email(message = "Email inválido")
+    private String username;
+
+    @NotBlank(message = "Senha é obrigatória")
+    private String password;
 }
