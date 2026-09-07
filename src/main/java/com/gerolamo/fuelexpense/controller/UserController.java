@@ -1,8 +1,8 @@
-package com.gerolamo.authservice.controller;
+package com.gerolamo.fuelexpense.controller;
 
-import com.gerolamo.authservice.dto.RegisterRequestDTO;
-import com.gerolamo.authservice.dto.RegisterResponseDTO;
-import com.gerolamo.authservice.service.UserService;
+import com.gerolamo.fuelexpense.dto.RegisterRequestDTO;
+import com.gerolamo.fuelexpense.dto.RegisterResponseDTO;
+import com.gerolamo.fuelexpense.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

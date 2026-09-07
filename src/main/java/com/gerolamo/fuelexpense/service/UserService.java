@@ -1,11 +1,11 @@
-package com.gerolamo.authservice.service;
+package com.gerolamo.fuelexpense.service;
 
-import com.gerolamo.authservice.dto.RegisterRequestDTO;
-import com.gerolamo.authservice.dto.RegisterResponseDTO;
-import com.gerolamo.authservice.model.Role;
-import com.gerolamo.authservice.model.User;
-import com.gerolamo.authservice.repository.RoleRepository;
-import com.gerolamo.authservice.repository.UserRepository;
+import com.gerolamo.fuelexpense.dto.RegisterRequestDTO;
+import com.gerolamo.fuelexpense.dto.RegisterResponseDTO;
+import com.gerolamo.fuelexpense.model.Role;
+import com.gerolamo.fuelexpense.model.User;
+import com.gerolamo.fuelexpense.repository.RoleRepository;
+import com.gerolamo.fuelexpense.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

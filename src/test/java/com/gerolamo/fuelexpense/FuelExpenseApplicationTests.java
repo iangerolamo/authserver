@@ -1,10 +1,10 @@
-package com.gerolamo.authservice;
+package com.gerolamo.fuelexpense;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuthserviceApplicationTests {
+class FuelExpenseApplicationTests {
 
 	@Test
 	void contextLoads() {

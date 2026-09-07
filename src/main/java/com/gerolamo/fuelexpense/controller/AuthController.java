@@ -1,9 +1,9 @@
-package com.gerolamo.authservice.controller;
+package com.gerolamo.fuelexpense.controller;
 
-import com.gerolamo.authservice.dto.AuthRequestDTO;
-import com.gerolamo.authservice.dto.AuthResponseDTO;
-import com.gerolamo.authservice.service.AuthService;
-import com.gerolamo.authservice.service.UserService;
+import com.gerolamo.fuelexpense.dto.AuthRequestDTO;
+import com.gerolamo.fuelexpense.dto.AuthResponseDTO;
+import com.gerolamo.fuelexpense.service.AuthService;
+import com.gerolamo.fuelexpense.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
-package com.gerolamo.authservice.util;
+package com.gerolamo.fuelexpense.util;
 
-import com.gerolamo.authservice.config.JwtConfig;
+import com.gerolamo.fuelexpense.config.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

@@ -1,4 +1,4 @@
-package com.gerolamo.authservice.config;
+package com.gerolamo.fuelexpense.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.gerolamo.authservice.model;
+package com.gerolamo.fuelexpense.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

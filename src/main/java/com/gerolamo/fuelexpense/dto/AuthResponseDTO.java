@@ -1,4 +1,4 @@
-package com.gerolamo.authservice.dto;
+package com.gerolamo.fuelexpense.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

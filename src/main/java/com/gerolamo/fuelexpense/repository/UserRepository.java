@@ -1,6 +1,6 @@
-package com.gerolamo.authservice.repository;
+package com.gerolamo.fuelexpense.repository;
 
-import com.gerolamo.authservice.model.User;
+import com.gerolamo.fuelexpense.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
